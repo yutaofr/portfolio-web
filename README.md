@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# Portfolio Visualization PWA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Built with Bun](https://img.shields.io/badge/Built%20with-Bun-fbf0df?style=flat&logo=bun&logoColor=black)](https://bun.sh)
+[![React](https://img.shields.io/badge/React-20232a?style=flat&logo=react&logoColor=61dafb)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007acc?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ed?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 
-Currently, two official plugins are available:
+A high-performance, web-native port of the original Java Desktop application, focusing on **Algorithmic Parity** and visual excellence. This PWA provides a seamless way to visualize portfolio performance directly from your XML exports.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-   **Algorithmic Parity**: Guaranteed identical calculations to the Java core using strict fixed-point arithmetic (`Big.js`).
+-   **Off-Thread Processing**: Fast XML parsing and heavy calculations handled in Web Workers to keep the UI smooth.
+-   **Dynamic Dashboard**: Modern, responsive UI with real-time performance metrics (NAV, TWR, ROI).
+-   **Asset Allocation**: Deep-dive into your portfolio's taxonomy (Region, Asset Class, etc.) with interactive charts.
+-   **Multi-Currency Support**: Robust cross-entry resolution for historical accuracy without external FX APIs.
+-   **PWA Ready**: Works offline and can be installed on any device for a native-like experience.
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-   **Runtime**: [Bun v1.x](https://bun.sh)
+-   **Framework**: [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com) + [Lucide Icons](https://lucide.dev)
+-   **State Management**: [Zustand](https://zustand-demo.pmnd.rs/)
+-   **Visualization**: [Recharts](https://recharts.org)
+-   **Math & Validation**: [Big.js](https://github.com/MikeMcl/big.js/) (1e8 scaling) + [Zod](https://zod.dev)
+-   **Infrastructure**: [Vite](https://vitejs.dev) + [Docker](https://www.docker.com)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+-   Docker and Docker Compose
+-   *OR* Bun installed locally
+
+### Running with Docker (Recommended)
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/your-repo/portfolio-web.git
+    cd portfolio-web
+    ```
+2.  Start the development server:
+    ```bash
+    docker-compose up --build
+    ```
+3.  Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Native Installation
+
+```bash
+bun install
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧪 Testing & Verification
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+We enforce **Algorithmic Parity** through a suite of "Golden Dataset" tests. These ensure our TypeScript engine matches the original Java core to the cent.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Run tests inside Docker:
+```bash
+docker-compose run --rm app bun test
 ```
+
+## 🏗 Architecture Overview
+
+The project follows a strict Model-View separation, mirroring the original OSGi bundle structure:
+
+-   **`src/domain/`**: Headless Core. Pure TypeScript. Zero dependencies on React. Responsible for all logic and math.
+-   **`src/workers/`**: Data adapters. Off-loads XML -> JSON parsing and scaling.
+-   **`src/components/` & `src/features/`**: UI Layer. React components styled with Tailwind.
+
+## 📈 Scalability
+
+-   **Streaming Parser**: Prepared for files > 50MB (future-proofed for large portfolios).
+-   **Scaling Standard**: Uses `PRICE_SCALING_FACTOR = 10^8` and `AMOUNT_SCALING_FACTOR = 10^2` consistently across the codebase.
+
+---
+
+*Generated by Antigravity - Advanced Agentic Coding Assistant.*
