@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+  <version>68</version>
+  <baseCurrency>EUR</baseCurrency>
+  <securities>
+    <security>
+      <uuid>sec-ytd-test-1</uuid>
+      <name>Test Stock A</name>
+      <currencyCode>EUR</currencyCode>
+      <isin>TEST0001</isin>
+      <tickerSymbol>TSTA</tickerSymbol>
+      <prices>
+        <!-- YTD period: 2026-01-01 to 2026-01-09 -->
+        <price t="2025-12-31" v="10000000000"/> <!-- 100.00 EUR -->
+        <price t="2026-01-01" v="10000000000"/> <!-- 100.00 EUR -->
+        <price t="2026-01-02" v="10050000000"/> <!-- 100.50 EUR -->
+        <price t="2026-01-03" v="10100000000"/> <!-- 101.00 EUR -->
+        <price t="2026-01-04" v="10100000000"/> <!-- 101.00 EUR -->
+        <price t="2026-01-05" v="10150000000"/> <!-- 101.50 EUR -->
+        <price t="2026-01-06" v="10200000000"/> <!-- 102.00 EUR -->
+        <price t="2026-01-07" v="10200000000"/> <!-- 102.00 EUR -->
+        <price t="2026-01-08" v="10250000000"/> <!-- 102.50 EUR -->
+        <price t="2026-01-09" v="10300000000"/> <!-- 103.00 EUR -->
+      </prices>
+    </security>
+    <security>
+      <uuid>sec-ytd-test-2</uuid>
+      <name>Test Stock B</name>
+      <currencyCode>EUR</currencyCode>
+      <isin>TEST0002</isin>
+      <tickerSymbol>TSTB</tickerSymbol>
+      <prices>
+        <price t="2025-12-31" v="5000000000"/> <!-- 50.00 EUR -->
+        <price t="2026-01-01" v="5000000000"/> <!-- 50.00 EUR -->
+        <price t="2026-01-02" v="5010000000"/> <!-- 50.10 EUR -->
+        <price t="2026-01-03" v="5020000000"/> <!-- 50.20 EUR -->
+        <price t="2026-01-04" v="5020000000"/> <!-- 50.20 EUR -->
+        <price t="2026-01-05" v="5030000000"/> <!-- 50.30 EUR -->
+        <price t="2026-01-06" v="5040000000"/> <!-- 50.40 EUR -->
+        <price t="2026-01-07" v="5040000000"/> <!-- 50.40 EUR -->
+        <price t="2026-01-08" v="5050000000"/> <!-- 50.50 EUR -->
+        <price t="2026-01-09" v="5060000000"/> <!-- 50.60 EUR -->
+      </prices>
+    </security>
+  </securities>
+  <accounts>
+    <account>
+      <uuid>acc-ytd-test-1</uuid>
+      <name>YTD Test Account</name>
+      <transactions>
+        <!-- Initial deposit before YTD period -->
+        <account-transaction>
+            <uuid>tx-deposit-1</uuid>
+            <date>2025-12-30</date>
+            <type>DEPOSIT</type>
+            <amount>40000000</amount> <!-- 400,000.00 EUR -->
+            <currencyCode>EUR</currencyCode>
+            <note>Initial capital</note>
+        </account-transaction>
+        <!-- Buy Stock A: 2000 shares @ 100 = 200,000 EUR -->
+        <account-transaction>
+            <uuid>tx-buy-1</uuid>
+            <date>2025-12-31</date>
+            <type>BUY</type>
+            <amount>20000000</amount> <!-- 200,000.00 EUR -->
+            <currencyCode>EUR</currencyCode>
+            <shares>200000000000</shares> <!-- 2000.0 shares -->
+            <security reference="../../../../../securities/security[1]"/>
+            <note>Buy Stock A</note>
+        </account-transaction>
+        <!-- Buy Stock B: 3800 shares @ 50 = 190,000 EUR -->
+        <account-transaction>
+            <uuid>tx-buy-2</uuid>
+            <date>2025-12-31</date>
+            <type>BUY</type>
+            <amount>19000000</amount> <!-- 190,000.00 EUR -->
+            <currencyCode>EUR</currencyCode>
+            <shares>380000000000</shares> <!-- 3800.0 shares -->
+            <security reference="../../../../../securities/security[2]"/>
+            <note>Buy Stock B</note>
+        </account-transaction>
+      </transactions>
+    </account>
+  </accounts>
+  <portfolios>
+      <portfolio>
+          <uuid>port-ytd-test-1</uuid>
+          <name>YTD Test Portfolio</name>
+          <transactions>
+              <portfolio-transaction>
+                  <uuid>tx-buy-1</uuid>
+                  <date>2025-12-31</date>
+                  <type>BUY</type>
+                  <amount>20000000</amount>
+                  <currencyCode>EUR</currencyCode>
+                  <shares>200000000000</shares>
+                  <security reference="../../../../../securities/security[1]"/>
+              </portfolio-transaction>
+              <portfolio-transaction>
+                  <uuid>tx-buy-2</uuid>
+                  <date>2025-12-31</date>
+                  <type>BUY</type>
+                  <amount>19000000</amount>
+                  <currencyCode>EUR</currencyCode>
+                  <shares>380000000000</shares>
+                  <security reference="../../../../../securities/security[2]"/>
+              </portfolio-transaction>
+          </transactions>
+      </portfolio>
+  </portfolios>
+</client>

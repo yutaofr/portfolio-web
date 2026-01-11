@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+  <version>68</version>
+  <baseCurrency>EUR</baseCurrency>
+  <securities>
+    <security>
+      <uuid>76e88d71-security-uuid-1</uuid>
+      <name>ISH NSDAQ 100</name>
+      <currencyCode>EUR</currencyCode>
+      <isin>IE00B53SZB19</isin>
+      <tickerSymbol>CSNDX</tickerSymbol>
+      <prices>
+        <price t="2023-01-01" v="19250000000"/> <!-- 192.50 -->
+        <price t="2023-01-02" v="19244000000"/> <!-- 192.44 -->
+        <price t="2023-01-03" v="19060000000"/> <!-- 190.60 -->
+      </prices>
+    </security>
+  </securities>
+  <accounts>
+    <account>
+      <uuid>account-uuid-1</uuid>
+      <name>Test Account</name>
+      <transactions>
+        <account-transaction>
+            <uuid>tx-1</uuid>
+            <date>2023-01-01</date>
+            <type>DEPOSIT</type>
+            <amount>200000</amount> <!-- 2000.00 EUR -->
+            <currencyCode>EUR</currencyCode>
+            <note>Initial Deposit</note>
+        </account-transaction>
+        <account-transaction>
+            <uuid>tx-2</uuid>
+            <date>2023-01-01</date>
+            <type>BUY</type>
+            <amount>192500</amount> <!-- 1925.00 EUR -->
+            <currencyCode>EUR</currencyCode>
+            <shares>1000000000</shares> <!-- 10.0 shares -->
+            <note>Buy 10 shares</note>
+            <security reference="../../../../../securities/security[1]"/>
+        </account-transaction>
+        <account-transaction>
+            <uuid>tx-3</uuid>
+            <date>2023-01-03</date>
+            <type>SELL</type>
+            <amount>95300</amount> <!-- 5 * 190.60 = 953.00 EUR -->
+            <currencyCode>EUR</currencyCode>
+            <shares>500000000</shares> <!-- 5.0 shares -->
+            <note>Sell 5 shares</note>
+            <security reference="../../../../../securities/security[1]"/>
+        </account-transaction>
+      </transactions>
+    </account>
+  </accounts>
+  <portfolios>
+      <portfolio>
+          <uuid>portfolio-uuid-1</uuid>
+          <name>Test Portfolio</name>
+          <transactions>
+               <!-- Portfolio transactions mirror account transactions but structural separation -->
+              <portfolio-transaction>
+                  <uuid>tx-2</uuid> <!-- Linking to account tx -->
+                  <date>2023-01-01</date>
+                  <type>BUY</type>
+                  <amount>192500</amount>
+                  <currencyCode>EUR</currencyCode>
+                  <shares>1000000000</shares>
+                  <security reference="../../../../../securities/security[1]"/>
+              </portfolio-transaction>
+              <portfolio-transaction>
+                  <uuid>tx-3</uuid>
+                  <date>2023-01-03</date>
+                  <type>SELL</type>
+                  <amount>95300</amount>
+                  <currencyCode>EUR</currencyCode>
+                  <shares>500000000</shares>
+                  <security reference="../../../../../securities/security[1]"/>
+              </portfolio-transaction>
+          </transactions>
+      </portfolio>
+  </portfolios>
+  <taxonomies>
+      <taxonomy>
+          <id>taxonomy-uuid-1</id>
+          <name>Asset Classes</name>
+          <root>
+              <id>root-uuid</id>
+              <name>Asset Classes</name>
+              <children>
+                  <classification>
+                      <id>class-stocks</id>
+                      <name>Stocks</name>
+                      <color>#ff0000</color>
+                      <parent reference="../../.."/>
+                      <children/>
+                      <assignments>
+                          <assignment>
+                              <investmentVehicle class="security" reference="../../../../../securities/security[1]"/> <!-- Index 0 is ISH NSDAQ 100 -->
+                              <weight>10000</weight>
+                              <rank>1</rank>
+                          </assignment>
+                      </assignments>
+                  </classification>
+              </children>
+          </root>
+      </taxonomy>
+  </taxonomies>
+</client>
